@@ -142,6 +142,34 @@ class LeArefBuelow2017(BaseExample):
         self.rx_bandwidth = 34e9 # in GHz
         """Bandwidth of the (ideal) low-pass filter at the receiver in Hz."""
 
+        # Simulated transmitter parameters
+        self.n_dac_bits = 8 # int for quantization or inf to skip quantization
+        """Number of bits (physical) in the digital to analog converter (DAC)."""
+        
+        self.dac_response = "chebyshev-3" # or None to avoid any filtering.
+        """After DAC quantization a frequency response is appylied with Chebyshev filter (type 1 or 2) of 3rd order."""
+        
+        self.dac_bandwidth = 34e9 # ineffective if self.dac_response is None
+        """Bandwidth of the DAC filter."""
+        
+        self.da_response = "Rapp_model" # or None : skips nonlinearity
+        """Nonlinear response of the driver amplifier (using Rapp model)."""
+
+        self.da_response = "butterworth-3" # or None to avoid any filtering.
+        """After DAC quantization a frequency response is appylied with Butterworth filter of 3rd order."""
+               
+        self.da_bandwidth = 34e9 # ineffective if self.dac_response is None
+        """Bandwidth of the DA filter."""
+        
+        self.mzm_response = "sinusoidal" # or None 
+        """Nonlinear response of the Mach-Zehnder modulator (MZM). """
+        
+        self.mzm_gain_imbalance = 1 # in percentage
+        """The gain imbalance between the MZM arms."""
+        
+        self.mzm_phase_imbalance = 1 # in degrees
+        """The phase imbalance between the MZM arms."""
+        
         self.reconfigure()
 
     def reconfigure(self):
@@ -207,6 +235,7 @@ class LeArefBuelow2017(BaseExample):
                                             self.power_control_factor,
                                             self.use_power_normalization_map)
 
+        # Simulated transmitter
         # Link
 
         from Links import SMFSplitStep
