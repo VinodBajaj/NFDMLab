@@ -11,7 +11,7 @@ Users can create a instance of an existing example class in order to perform sim
 .. code-block:: python
 
   import Examples
-  ex = Example.BuelowArefIdler2016()
+  ex = Examples.BuelowArefIdler2016()
 
 A list of existing examples is provided under :doc:`examples`.
 
@@ -42,7 +42,7 @@ The classes in :doc:`qualityassessment` can be used for custom analyses. For exa
 .. code-block:: python
 
   from QualityAssessment import BitErrorRatio
-  ber = BitErrorRate(ex.constellation)
+  ber = BitErrorRatio(ex.constellation)
   ber_value, n_err, n_bits = ber.compute(tx_data["symbols"], rx_data["symbols"])
   print("The bit error ratio is", ber_value)
 
